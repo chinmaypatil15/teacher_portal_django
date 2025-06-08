@@ -1,0 +1,56 @@
+{% extends 'auth/base.html' %}
+
+{% block title %}Profile{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="auth-card p-4">
+                <div class="text-center mb-4">
+                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 100px; height: 100px;">
+                        <span class="text-white" style="font-size: 2.5rem;">{{ user.username.0|upper }}</span>
+                    </div>
+                    <h2 class="fw-bold">{{ user.get_full_name|default:user.username }}</h2>
+                    <p class="text-muted">Member since {{ user.date_joined|date:"F Y" }}</p>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Username</label>
+                            <p class="form-control-static">{{ user.username }}</p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">First Name</label>
+                            <p class="form-control-static">{{ user.first_name|default:"Not provided" }}</p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Last Login</label>
+                            <p class="form-control-static">{{ user.last_login|date:"M d, Y H:i"|default:"Never" }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Email</label>
+                            <p class="form-control-static">{{ user.email|default:"Not provided" }}</p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Last Name</label>
+                            <p class="form-control-static">{{ user.last_name|default:"Not provided" }}</p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Date Joined</label>
+                            <p class="form-control-static">{{ user.date_joined|date:"M d, Y" }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="{% url 'dashboard' %}" class="btn btn-custom">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
