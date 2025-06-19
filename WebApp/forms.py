@@ -2,6 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
+from django import forms
+from .models import Student
+
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -32,15 +35,13 @@ class CustomLoginForm(AuthenticationForm):
     )
 
 
-from django import forms
-from .models import Student
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = ['name', 'subject', 'marks']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'subject': forms.TextInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter student name'}),
+            'subject': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter subject'}),
             'marks': forms.NumberInput(attrs={
                 'class': 'form-control',
                 'min': 0,
@@ -53,6 +54,9 @@ class StudentForm(forms.ModelForm):
         if marks is not None and (marks < 0 or marks > 100):
             raise forms.ValidationError("Marks should be between 0 and 100.")
         return marks
+
+
+
 
 
 # class StudentForm(forms.ModelForm):

@@ -15,10 +15,4 @@ class Student(models.Model):
     
     class Meta:
         ordering = ['-created_at']
-        constraints = [
-            models.UniqueConstraint(
-                fields=['name', 'subject'],
-                name='unique_student_subject',
-                violation_error_message='Student already exists for this subject'
-            )
-        ]
+        

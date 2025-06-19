@@ -94,24 +94,19 @@ def add_student_view(request):
             subject = form.cleaned_data['subject'].strip()
             marks = form.cleaned_data['marks']
 
-            # Check for existing student with same name and subject
+            # Check for existing student
             existing_student = Student.objects.filter(
                 name__iexact=name,
                 subject__iexact=subject
             ).first()
 
             if existing_student:
-                # ✅ Update marks if student exists
                 existing_student.marks += marks
                 existing_student.save()
                 messages.success(request, f"{name}'s marks updated to {existing_student.marks}.")
             else:
-                # ✅ Create new student
-                try:
-                    new_student = form.save()
-                    messages.success(request, f"{name} added successfully.")
-                except Exception as e:
-                    messages.error(request, f"Error: {e}")
+                form.save()
+                messages.success(request, f"{name} added successfully.")
 
             return redirect('dashboard')
         else:
@@ -120,6 +115,7 @@ def add_student_view(request):
         form = StudentForm()
 
     return render(request, 'auth/add_student.html', {'form': form})
+
 
 
 @login_required
