@@ -79,7 +79,13 @@ python manage.py runserver
 Visit: http://127.0.0.1:8000/
 
 ---
+### 7. Login user and pass
+```
 
+User: admin
+Pass: admin
+
+---
 ## 📁 Project Structure
 
 ```
